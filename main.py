@@ -1,19 +1,18 @@
 from fastapi import FastAPI
-import pandas as pd
-from src.data_loader import load_and_align_usdjpy
-from src.feature_engineering import add_technical_features
-import joblib
-import os
 
-app = FastAPI(title="USDJPY Direction Prediction API")
+app = FastAPI(
+    title="USDJPY Direction Prediction Service",
+    description="USDJPY 方向預測 API（Render 部署版）",
+    version="1.0.0"
+)
 
 @app.get("/")
 def root():
-    return {"message": "USDJPY Direction ML Service is running"}
+    return {
+        "message": "USDJPY Direction ML Service is running on Render",
+        "status": "ok"
+    }
 
 @app.get("/health")
-def health():
-    return {"status": "ok"}
-
-# 之後我們再加上 /predict 和 /train 端點
-
+def health_check():
+    return {"status": "healthy"}
